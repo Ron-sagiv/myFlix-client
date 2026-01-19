@@ -3,8 +3,11 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import PropTypes from 'prop-types';
 import { LoginView } from '../login-view/login-view';
+import { SignupView } from '../signup-view/signup-view';
 
 export const MainView = () => {
+  const storedUser = JSON.parse(localStorage.getItem('user'));
+  const storedToken = localStorage.getItem('token');
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -56,12 +59,16 @@ export const MainView = () => {
 
   if (!user) {
     return (
-      <LoginView
-        onLoggedIn={(user, token) => {
-          setUser(user);
-          setToken(token);
-        }}
-      />
+      <>
+        <LoginView
+          onLoggedIn={(user, token) => {
+            setUser(user);
+            setToken(token);
+          }}
+        />
+        or
+        <SignupView />
+      </>
     );
   }
 
@@ -72,6 +79,7 @@ export const MainView = () => {
           onClick={() => {
             setUser(null);
             setToken(null);
+            localStorage.clear();
           }}
         >
           Logout
@@ -91,6 +99,7 @@ export const MainView = () => {
           onClick={() => {
             setUser(null);
             setToken(null);
+            localStorage.clear();
           }}
         >
           Logout
@@ -105,6 +114,7 @@ export const MainView = () => {
           onClick={() => {
             setUser(null);
             setToken(null);
+            localStorage.clear();
           }}
         >
           Logout

@@ -11,8 +11,8 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(storedUser);
+  const [token, setToken] = useState(storedToken);
 
   // useEffect(() => {
   //   console.log('Use Effect is Running');
@@ -53,10 +53,6 @@ export const MainView = () => {
       });
   }, [token]); // dependency updated
 
-  if (loading) {
-    return <h3>Loading.......</h3>;
-  }
-
   if (!user) {
     return (
       <>
@@ -70,6 +66,9 @@ export const MainView = () => {
         <SignupView />
       </>
     );
+  }
+  if (loading) {
+    return <h3>Loading.......</h3>;
   }
 
   if (selectedMovie) {

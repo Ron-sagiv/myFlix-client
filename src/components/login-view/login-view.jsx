@@ -14,8 +14,8 @@ export const LoginView = ({ onLoggedIn }) => {
 
     const data = {
       //in the api it is userName. need to check how to do it
-      Username: username,
-      Password: password,
+      userName: username,
+      password: password,
     };
 
     fetch('https://flixirama-1ce078bad93f.herokuapp.com/login', {
@@ -48,7 +48,6 @@ export const LoginView = ({ onLoggedIn }) => {
         <input
           type="text"
           value={username}
-          minlength="4"
           onChange={(e) => setUsername(e.target.value)}
           required
         />

@@ -17436,8 +17436,8 @@ const MainView = ()=>{
     const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     const [loading, setLoading] = (0, _react.useState)(true);
-    const [user, setUser] = (0, _react.useState)(null);
-    const [token, setToken] = (0, _react.useState)(null);
+    const [user, setUser] = (0, _react.useState)(storedUser);
+    const [token, setToken] = (0, _react.useState)(storedToken);
     // useEffect(() => {
     //   console.log('Use Effect is Running');
     //   fetch('https://flixirama-1ce078bad93f.herokuapp.com/movies')
@@ -17470,13 +17470,6 @@ const MainView = ()=>{
     }, [
         token
     ]); // dependency updated
-    if (loading) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
-        children: "Loading......."
-    }, void 0, false, {
-        fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 57,
-        columnNumber: 12
-    }, undefined);
     if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
@@ -17486,17 +17479,24 @@ const MainView = ()=>{
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 63,
+                lineNumber: 59,
                 columnNumber: 9
             }, undefined),
             "or",
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signupView.SignupView), {}, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 70,
+                lineNumber: 66,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true);
+    if (loading) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+        children: "Loading......."
+    }, void 0, false, {
+        fileName: "src/components/main-view/main-view.jsx",
+        lineNumber: 71,
+        columnNumber: 12
+    }, undefined);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -17508,7 +17508,7 @@ const MainView = ()=>{
                 children: "Logout"
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 78,
+                lineNumber: 77,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
@@ -17516,7 +17516,7 @@ const MainView = ()=>{
                 onBackClick: ()=>setSelectedMovie(null)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 87,
+                lineNumber: 86,
                 columnNumber: 9
             }, undefined)
         ]
@@ -17532,14 +17532,14 @@ const MainView = ()=>{
                 children: "Logout"
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 98,
+                lineNumber: 97,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: "The list is empty!"
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 107,
+                lineNumber: 106,
                 columnNumber: 9
             }, undefined)
         ]
@@ -17555,7 +17555,7 @@ const MainView = ()=>{
                 children: "Logout"
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 113,
+                lineNumber: 112,
                 columnNumber: 9
             }, undefined),
             movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
@@ -17565,17 +17565,17 @@ const MainView = ()=>{
                     }
                 }, movie._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 123,
+                    lineNumber: 122,
                     columnNumber: 11
                 }, undefined))
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 112,
+        lineNumber: 111,
         columnNumber: 7
     }, undefined);
 };
-_s(MainView, "UM7fQ+CznGJ1paSxNfvtib0f2hg=");
+_s(MainView, "Ne71uqxaL/VmY4cCdr3U5pdoM3c=");
 _c = MainView;
 // Here is where we define all the props constraints for the MainView
 MainView.propTypes = {};
@@ -17587,7 +17587,7 @@ $RefreshReg$(_c, "MainView");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","../movie-card/movie-card":"6BY1s","../movie-view/movie-view":"dkfGy","prop-types":"GNqOQ","../login-view/login-view":"8ru9P","@parcel/transformer-js/src/esmodule-helpers.js":"g2fg8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8ozSd","../signup-view/signup-view":"nAl3Z"}],"6BY1s":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","../movie-card/movie-card":"6BY1s","../movie-view/movie-view":"dkfGy","prop-types":"GNqOQ","../login-view/login-view":"8ru9P","../signup-view/signup-view":"nAl3Z","@parcel/transformer-js/src/esmodule-helpers.js":"g2fg8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8ozSd"}],"6BY1s":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$f387 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$f387.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -20927,8 +20927,8 @@ const LoginView = ({ onLoggedIn })=>{
         event.preventDefault();
         const data = {
             //in the api it is userName. need to check how to do it
-            Username: username,
-            Password: password
+            userName: username,
+            password: password
         };
         fetch('https://flixirama-1ce078bad93f.herokuapp.com/login', {
             method: 'POST',
@@ -20956,7 +20956,6 @@ const LoginView = ({ onLoggedIn })=>{
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                         type: "text",
                         value: username,
-                        minlength: "4",
                         onChange: (e)=>setUsername(e.target.value),
                         required: true
                     }, void 0, false, {
@@ -20980,13 +20979,13 @@ const LoginView = ({ onLoggedIn })=>{
                         required: true
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 58,
+                        lineNumber: 57,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 56,
+                lineNumber: 55,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -20994,7 +20993,7 @@ const LoginView = ({ onLoggedIn })=>{
                 children: "Submit"
             }, void 0, false, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 65,
+                lineNumber: 64,
                 columnNumber: 7
             }, undefined)
         ]
@@ -21014,7 +21013,7 @@ $RefreshReg$(_c, "LoginView");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","@parcel/transformer-js/src/esmodule-helpers.js":"g2fg8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8ozSd","react":"jMk1U"}],"nAl3Z":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"g2fg8","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8ozSd"}],"nAl3Z":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$69e4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$69e4.init();
 var prevRefreshReg = globalThis.$RefreshReg$;

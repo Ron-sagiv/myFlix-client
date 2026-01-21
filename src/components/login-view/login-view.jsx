@@ -14,8 +14,8 @@ export const LoginView = ({ onLoggedIn }) => {
 
     const data = {
       //in the api it is userName. need to check how to do it
-      Username: username,
-      Password: password,
+      userName: username,
+      password: password,
     };
 
     fetch('https://flixirama-1ce078bad93f.herokuapp.com/login', {
@@ -29,6 +29,8 @@ export const LoginView = ({ onLoggedIn }) => {
       .then((data) => {
         console.log('Login response: ', data);
         if (data.user) {
+          localStorage.setItem('user', JSON.stringify(data.user));
+          localStorage.setItem('token', data.token);
           onLoggedIn(data.user, data.token);
         } else {
           alert('No such user');
@@ -46,7 +48,6 @@ export const LoginView = ({ onLoggedIn }) => {
         <input
           type="text"
           value={username}
-          minlength="4"
           onChange={(e) => setUsername(e.target.value)}
           required
         />

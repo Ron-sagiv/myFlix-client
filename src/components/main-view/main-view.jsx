@@ -6,6 +6,9 @@ import { LoginView } from '../login-view/login-view';
 import { SignupView } from '../signup-view/signup-view';
 import { Button, Container, Nav, Navbar, Row, Col } from 'react-bootstrap';
 
+/* =========================
+   MainView Component
+========================= */
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const storedToken = localStorage.getItem('token');
@@ -41,79 +44,83 @@ export const MainView = () => {
   }, [token]); // dependency updated
   //================================================================
 
+  /* =========================
+     ADDED: shared logout handler
+     (moved logic from old navbar)
+  ========================= */
+  const handleLogout = () => {
+    setUser(null);
+    setToken(null);
+    localStorage.clear();
+  };
+
+  //================================================================
   //  CHANGED: single return with Row as root + ternary operators
   return (
-    <Row className="justify-content-md-center">
-      {!user ? (
-        <Col md={5}>
-          <LoginView
-            onLoggedIn={(user, token) => {
-              setUser(user);
-              setToken(token);
-            }}
-          />
-          Not a user yet?
-          <SignupView />
-        </Col>
-      ) : loading ? (
-        <h3>Loading.......</h3>
-      ) : selectedMovie ? (
-        <>
-          <Button
-            onClick={() => {
-              setUser(null);
-              setToken(null);
-              localStorage.clear();
-            }}
-          >
-            Logout
-          </Button>
-          <Col md={8}>
-            <MovieView
-              movie={selectedMovie}
-              onBackClick={() => setSelectedMovie(null)}
-            />
-          </Col>
-        </>
-      ) : movies.length === 0 ? (
-        <>
-          <Button
-            onClick={() => {
-              setUser(null);
-              setToken(null);
-              localStorage.clear();
-            }}
-          >
-            Logout
-          </Button>
-          <div>The list is empty!</div>
-        </>
-      ) : (
-        <>
-          <Button
-            variant="primary"
-            onClick={() => {
-              setUser(null);
-              setToken(null);
-              localStorage.clear();
-            }}
-          >
-            Logout
-          </Button>
+    <>
+      {/* =========================
+         ADDED: Navbar from OLD file
+         Only renders when user is logged in
+      ========================= */}
+      {user && (
+        <Navbar bg="dark" data-bs-theme="dark" className="mb-4">
+          <Container>
+            <Navbar.Brand href="/">Flixirama</Navbar.Brand>
+            <Nav className="me-auto">
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+            </Nav>
+          </Container>
+        </Navbar>
+      )}
 
-          {movies.map((movie) => (
-            <Col className="mb-3" key={movie._id} md={3}>
-              <MovieCard
-                movie={movie}
-                onMovieClick={(newSelectedMovie) => {
-                  setSelectedMovie(newSelectedMovie);
-                }}
+      <Row className="justify-content-md-center">
+        {!user ? (
+          <Col md={5}>
+            <LoginView
+              onLoggedIn={(user, token) => {
+                setUser(user);
+                setToken(token);
+              }}
+            />
+            Not a user yet?
+            <SignupView />
+          </Col>
+        ) : loading ? (
+          <h3>Loading.......</h3>
+        ) : selectedMovie ? (
+          <>
+            {/* REMOVED: standalone Logout button (now in Navbar) */}
+            <Col md={8}>
+              <MovieView
+                movie={selectedMovie}
+                onBackClick={() => setSelectedMovie(null)}
               />
             </Col>
-          ))}
-        </>
-      )}
-    </Row>
+          </>
+        ) : movies.length === 0 ? (
+          <>
+            {/* REMOVED: standalone Logout button (now in Navbar) */}
+            <div>The list is empty!</div>
+          </>
+        ) : (
+          <>
+            {/* REMOVED: standalone Logout button (now in Navbar) */}
+
+            {movies.map((movie) => (
+              <Col className="mb-3" key={movie._id} md={3}>
+                <MovieCard
+                  movie={movie}
+                  onMovieClick={(newSelectedMovie) => {
+                    setSelectedMovie(newSelectedMovie);
+                  }}
+                />
+              </Col>
+            ))}
+          </>
+        )}
+      </Row>
+    </>
   );
 };
 

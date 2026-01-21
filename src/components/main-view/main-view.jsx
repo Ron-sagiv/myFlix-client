@@ -4,6 +4,7 @@ import { MovieView } from '../movie-view/movie-view';
 import PropTypes from 'prop-types';
 import { LoginView } from '../login-view/login-view';
 import { SignupView } from '../signup-view/signup-view';
+import { Button, Container, Nav, Navbar, Row, Col } from 'react-bootstrap';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -14,20 +15,6 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser);
   const [token, setToken] = useState(storedToken);
 
-  // useEffect(() => {
-  //   console.log('Use Effect is Running');
-  //   fetch('https://flixirama-1ce078bad93f.herokuapp.com/movies')
-  //     .then((response) => response.json())
-  //     .then((movies) => {
-  //       setMovies(movies); // Setting/Updating movies from API to the react state movies
-  //     })
-  //     .catch((err) => {
-  //       console.error('Something wrong in fetching movies', err);
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // }, []);
   useEffect(() => {
     console.log('Use Effect is Running');
 
@@ -52,84 +39,83 @@ export const MainView = () => {
         setLoading(false);
       });
   }, [token]); // dependency updated
+  //================================================================
 
-  if (!user) {
-    return (
-      <>
-        <LoginView
-          onLoggedIn={(user, token) => {
-            setUser(user);
-            setToken(token);
-          }}
-        />
-        or
-        <SignupView />
-      </>
-    );
-  }
-  if (loading) {
-    return <h3>Loading.......</h3>;
-  }
-
-  if (selectedMovie) {
-    return (
-      <>
-        <button
-          onClick={() => {
-            setUser(null);
-            setToken(null);
-            localStorage.clear();
-          }}
-        >
-          Logout
-        </button>
-        <MovieView
-          movie={selectedMovie}
-          onBackClick={() => setSelectedMovie(null)}
-        />
-      </>
-    );
-  }
-
-  if (movies.length === 0) {
-    return (
-      <>
-        <button
-          onClick={() => {
-            setUser(null);
-            setToken(null);
-            localStorage.clear();
-          }}
-        >
-          Logout
-        </button>
-        <div>The list is empty!</div>
-      </>
-    );
-  } else {
-    return (
-      <div>
-        <button
-          onClick={() => {
-            setUser(null);
-            setToken(null);
-            localStorage.clear();
-          }}
-        >
-          Logout
-        </button>
-        {movies.map((movie) => (
-          <MovieCard
-            key={movie._id}
-            movie={movie}
-            onMovieClick={(newSelectedMovie) => {
-              setSelectedMovie(newSelectedMovie);
+  //  CHANGED: single return with Row as root + ternary operators
+  return (
+    <Row className="justify-content-md-center">
+      {!user ? (
+        <Col md={5}>
+          <LoginView
+            onLoggedIn={(user, token) => {
+              setUser(user);
+              setToken(token);
             }}
           />
-        ))}
-      </div>
-    );
-  }
+          Not a user yet?
+          <SignupView />
+        </Col>
+      ) : loading ? (
+        <h3>Loading.......</h3>
+      ) : selectedMovie ? (
+        <>
+          <Button
+            onClick={() => {
+              setUser(null);
+              setToken(null);
+              localStorage.clear();
+            }}
+          >
+            Logout
+          </Button>
+          <Col md={8}>
+            <MovieView
+              movie={selectedMovie}
+              onBackClick={() => setSelectedMovie(null)}
+            />
+          </Col>
+        </>
+      ) : movies.length === 0 ? (
+        <>
+          <Button
+            onClick={() => {
+              setUser(null);
+              setToken(null);
+              localStorage.clear();
+            }}
+          >
+            Logout
+          </Button>
+          <div>The list is empty!</div>
+        </>
+      ) : (
+        <>
+          <Button
+            variant="primary"
+            onClick={() => {
+              setUser(null);
+              setToken(null);
+              localStorage.clear();
+            }}
+          >
+            Logout
+          </Button>
+
+          {movies.map((movie) => (
+            <Col className="mb-3" key={movie._id} md={3}>
+              <MovieCard
+                movie={movie}
+                onMovieClick={(newSelectedMovie) => {
+                  setSelectedMovie(newSelectedMovie);
+                }}
+              />
+            </Col>
+          ))}
+        </>
+      )}
+    </Row>
+  );
 };
+
 // Here is where we define all the props constraints for the MainView
 MainView.propTypes = {};

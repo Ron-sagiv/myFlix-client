@@ -1,10 +1,19 @@
 import { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 export const SignupView = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
+
+  const clearInputs = () => {
+    setUserName('');
+    setBirthday('');
+    setPassword('');
+    setEmail('');
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,65 +34,63 @@ export const SignupView = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Signup failed');
+          if (response.status == 400) {
+            throw new Error('User already Exists');
+          }
+          throw new Error('Something went wrong during signup.');
         }
         return response.json();
       })
       .then((result) => {
         console.log('Signup success:', result);
+        clearInputs();
         alert('Account created successfully!');
       })
-      .catch((error) => {
-        console.error('Error:', error);
-        alert('Something went wrong during signup.');
+      .catch((e) => {
+        console.log('Error:', e);
+        alert(e.message);
       });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input
-          type="text"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-          required
-          minLength="3"
-        />
-      </label>
+    <Form onSubmit={handleSubmit}>
+      <Form.Label>Username:</Form.Label>
+      <Form.Control
+        type="text"
+        value={userName}
+        onChange={(e) => setUserName(e.target.value)}
+        required
+        minLength="3"
+      />
 
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          minLength="6"
-        />
-      </label>
+      <Form.Label>Password:</Form.Label>
+      <Form.Control
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+        minLength="6"
+      />
 
-      <label>
-        Email:
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
+      <Form.Label>Email:</Form.Label>
+      <Form.Control
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
 
-      <label>
-        Birthday:
-        <input
-          type="date"
-          value={birthday}
-          onChange={(e) => setBirthday(e.target.value)}
-          required
-        />
-      </label>
+      <Form.Label>Birthday:</Form.Label>
+      <Form.Control
+        type="date"
+        value={birthday}
+        onChange={(e) => setBirthday(e.target.value)}
+        required
+      />
 
-      <button type="submit">Sign Up</button>
-    </form>
+      <Button variant="primary" type="submit">
+        Sign Up
+      </Button>
+    </Form>
   );
 };

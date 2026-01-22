@@ -1,17 +1,27 @@
 import PropTypes from 'prop-types';
+import { Card } from 'react-bootstrap';
+import './movie-card.scss';
 
 export const MovieCard = ({ movie, onMovieClick }) => {
   return (
-    <div
-      onClick={() => {
-        onMovieClick(movie);
-      }}
+    <Card
+      className="movie-card-flixirama h-100"
+      onClick={() => onMovieClick(movie)}
     >
-      {movie.title} - {movie.rating}
-    </div>
+      {/* Poster */}
+      <div className="poster-wrapper">
+        <Card.Img variant="top" src={movie.imageUrl} alt={movie.title} />
+
+        {/* hover overlay */}
+        <div className="movie-overlay">
+          <h5 className="movie-title">{movie.title}</h5>
+          <p className="movie-description">{movie.description}</p>
+        </div>
+      </div>
+    </Card>
   );
 };
-// Here is where we define all the props constraints for the MovieCard
+
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,

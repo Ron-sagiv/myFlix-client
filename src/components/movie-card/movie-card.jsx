@@ -1,29 +1,27 @@
 import PropTypes from 'prop-types';
-import { Button, Card, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import './movie-card.scss';
 
 export const MovieCard = ({ movie, onMovieClick }) => {
   return (
-    //<Col style={{ marginBottom: '10px' }}>
     <Card
-      className="h-100"
-      // style={{ width: '18rem' }}
-      onClick={() => {
-        onMovieClick(movie);
-      }}
+      className="movie-card-flixirama h-100"
+      onClick={() => onMovieClick(movie)}
     >
-      <Card.Img variant="top" src={movie.imageUrl} />
-      <Card.Body className="d-flex flex-column">
-        <Card.Title>{movie.title}</Card.Title>
-        <Card.Text>{movie.description}</Card.Text>
-        <Button variant="primary" className="mt-auto">
-          More
-        </Button>
-      </Card.Body>
+      {/* Poster */}
+      <div className="poster-wrapper">
+        <Card.Img variant="top" src={movie.imageUrl} alt={movie.title} />
+
+        {/* hover overlay */}
+        <div className="movie-overlay">
+          <h5 className="movie-title">{movie.title}</h5>
+          <p className="movie-description">{movie.description}</p>
+        </div>
+      </div>
     </Card>
-    //</Col>
   );
 };
-// Here is where we define all the props constraints for the MovieCard
+
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,

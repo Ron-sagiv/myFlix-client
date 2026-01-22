@@ -3,3 +3,6 @@ node_modules
 .parcel-cache
 .DS_Store 
 src/components/main-view/main-view2.jsx
+src/components/movie-view/movie-view2.jsx
+src/components/movie-view/movie-view2.scss
+src/components/movie-card/movie-card2.jsx

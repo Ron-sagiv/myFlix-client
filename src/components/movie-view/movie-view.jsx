@@ -1,8 +1,9 @@
 import './movie-view.scss';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movie }) => {
   return (
     <div className="movie-view-flixirama">
       <img src={movie.imageUrl} alt={movie.title} className="movie-poster" />
@@ -24,9 +25,9 @@ export const MovieView = ({ movie, onBackClick }) => {
           <strong>Director:</strong> {movie.director.name}
         </p>
 
-        <Button variant="danger" className="back-button" onClick={onBackClick}>
-          ← Back to list
-        </Button>
+        <Link to={'/'}>
+          <button className="back-button btn btn-danger">← Back to list</button>
+        </Link>
       </div>
     </div>
   );

@@ -74,7 +74,7 @@ export const MovieView = ({ movie }) => {
         {storedUser && (
           <Button
             variant={isFavorite ? 'danger' : 'outline-danger'}
-            className="me-2"
+            className="me-2 favBtn"
             onClick={handleToggleFavorite}
           >
             {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}

@@ -28397,7 +28397,7 @@ const MovieView = ({ movie })=>{
                     }, undefined),
                     storedUser && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
                         variant: isFavorite ? 'danger' : 'outline-danger',
-                        className: "me-2",
+                        className: "me-2 favBtn",
                         onClick: handleToggleFavorite,
                         children: isFavorite ? 'Remove from Favorites' : 'Add to Favorites'
                     }, void 0, false, {

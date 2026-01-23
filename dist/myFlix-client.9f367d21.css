@@ -97,7 +97,7 @@
   color: #fffc;
 }
 
-.back-button {
+.back-button .favBtn {
   align-self: flex-start;
   margin-top: 1.5rem;
   background-color: #d80505 !important;

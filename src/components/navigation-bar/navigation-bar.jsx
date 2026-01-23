@@ -8,10 +8,19 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
         <Navbar.Brand as={Link} to="/">
           Flixirama
         </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/">
+              Home
+            </Nav.Link>
+            {user && (
+              <Nav.Link as={Link} to={`/users/${user.userName}`}>
+                My Profile
+              </Nav.Link>
+            )}
+
             <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>

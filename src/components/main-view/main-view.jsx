@@ -90,7 +90,7 @@ export const MainView = () => {
                 <LoginView onLoggedIn={onLoggedIn} />
               ) : (
                 <Col md={8}>
-                  <MovieView movie={movies[0]} />
+                  <MovieView movies={movies} />
                 </Col>
               )
             }

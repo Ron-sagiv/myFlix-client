@@ -1,10 +1,13 @@
 import './movie-view.scss';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-export const MovieView = ({ movie }) => {
+export const MovieView = ({ movies }) => {
+  const { movieId } = useParams();
+  const movie = movies.find((m) => m._id === movieId);
+
   /* =========================
      auth + state
      ========================= */
@@ -17,10 +20,10 @@ export const MovieView = ({ movie }) => {
      check if favorite
      ========================= */
   useEffect(() => {
-    if (!storedUser || !movie) return;
+    if (!storedUser || !movie || !movies) return;
 
     setIsFavorite(storedUser.favoriteMovies?.includes(movie._id));
-  }, [storedUser, movie]);
+  }, [storedUser, movies]);
 
   /* =========================
      toggle favorite
@@ -46,6 +49,14 @@ export const MovieView = ({ movie }) => {
       })
       .catch((err) => console.error(err));
   };
+
+  if (!movie) {
+    return (
+      <div>
+        <h2>No such movie!</h2>
+      </div>
+    );
+  }
 
   return (
     <div className="movie-view-flixirama">

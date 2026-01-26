@@ -8,6 +8,7 @@ import { ProfileView } from '../profile-view/profile-view';
 import { Row, Col } from 'react-bootstrap';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { NavigationBar } from '../navigation-bar/navigation-bar';
+import { Rings } from 'react-loader-spinner';
 
 /* =========================
    MainView Component
@@ -18,7 +19,7 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(storedUser);
   const [token, setToken] = useState(storedToken);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     console.log('Use Effect is Running');
@@ -39,7 +40,8 @@ export const MainView = () => {
       })
       .catch((err) => {
         console.error('Something wrong in fetching movies', err);
-      });
+      })
+      .finally(() => setLoading(false));
   }, [token]); // dependency updated
   //================================================================
 
@@ -58,6 +60,21 @@ export const MainView = () => {
     setUser(user);
     localStorage.setItem('user', JSON.stringify(user));
   };
+
+  if (loading) {
+    return (
+      <div className="loader">
+        <Rings
+          visible={true}
+          height="80"
+          width="80"
+          strokeColor="yellow"
+          color="#D80505"
+          ariaLabel="myflix-spinner-loading"
+        />
+      </div>
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -139,4 +156,4 @@ export const MainView = () => {
 };
 
 // Here is where we define all the props constraints for the MainView
-MainView.propTypes = {};
+MainView.propTypes = { movies: PropTypes.array.isRequired };

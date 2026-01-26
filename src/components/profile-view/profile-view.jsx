@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Row, Col, Button, Form, Card } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import { MovieCard } from '../movie-card/movie-card';
-
+import PropTypes from 'prop-types';
 /* =========================
    ProfileView Component
 ========================= */
@@ -177,19 +177,22 @@ export const ProfileView = ({ user, movies, onUserUpdate }) => {
 
       {/* ================= FAVORITE MOVIES ================= */}
       <Col md={8}>
-        <h3 className="mb-3">Favorite Movies</h3>
+        {/* Greeting */}
+        <h2 className="text-center mb-4">Hi, {user.userName} </h2>
+
+        <h3>Favorite Movies</h3>
         <Row>
           {favoriteMovieObjects.length === 0 && <p>No favorite movies yet.</p>}
 
           {favoriteMovieObjects.map((movie) => (
-            <Col key={movie._id} md={6} lg={4} className="mb-3">
+            <Col key={movie._id} md={6} lg={4} className="mb-3 mt-5">
               <MovieCard movie={movie} />
 
               {/* remove button below card */}
               <Button
                 variant="outline-danger"
                 size="sm"
-                className="mt-2 w-100"
+                className="mt-2 w-100 mb-3"
                 onClick={() => handleRemoveFavorite(movie._id)}
               >
                 Remove from Favorites
@@ -200,4 +203,10 @@ export const ProfileView = ({ user, movies, onUserUpdate }) => {
       </Col>
     </>
   );
+};
+/* =========================
+   PropTypes 
+========================= */
+ProfileView.propTypes = {
+  movies: PropTypes.array.isRequired,
 };

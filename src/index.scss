@@ -1,8 +1,4 @@
-// $color: steelblue;
-
-// .my-flix {
-//   color: $color;
-// }
+// #D80505 or rgb(216, 5, 5) the red I use
 $primary: rgb(216, 5, 5);
 $body-bg: black;
 $body-color: white;
@@ -13,64 +9,14 @@ $body-color: white;
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
 }
-// .movie-view-image {
-//   max-width: 250px;
-//   aspect-ratio: 2 / 3; // movie poster ratio
-//   object-fit: cover;
-//   margin-bottom: 1.5rem;
-//   border-radius: 8px;
-//   //   border: 1px solid rgba(255, 255, 255, 0.3);
-// }
 
-// .movie-view-whole {
-//   display: flex;
-//   gap: 2rem;
-//   align-items: flex-start;
-// }
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+}
 
-// .movie-view-image {
-//   max-width: 250px;
-//   flex-shrink: 0;
-// }
-
-// .movie-view-details {
-//   flex: 1;
-// }
-//====movie-view=========================
-// .movie-view-whole {
-//   display: flex;
-//   gap: 2rem;
-//   align-items: flex-start;
-//   margin-top: 20px;
-// }
-
-// /* Image */
-// .movie-view-image {
-//   max-width: 250px;
-//   width: 100%;
-//   flex-shrink: 0;
-//   border-radius: 8px;
-// }
-
-// /* Details */
-// .movie-view-details {
-//   flex: 1;
-//   margin-top: 20px;
-// }
-
-// /* 📱 Mobile layout */
-// @media (max-width: 768px) {
-//   .movie-view-whole {
-//     flex-direction: column;
-//     align-items: center;
-//   }
-
-//   .movie-view-image {
-//     max-width: 220px;
-//   }
-
-//   .movie-view-details {
-//     width: 100%;
-//     text-align: left;
-//   }
-// }
+.Button .btn-danger {
+  background-color: rgb(216, 5, 5) !important;
+}

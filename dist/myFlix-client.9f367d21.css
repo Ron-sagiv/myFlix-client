@@ -13305,4 +13305,15 @@ textarea.form-control-lg {
   border: 2px solid #ffffff4d;
   border-radius: 8px;
 }
+
+.loader {
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+  display: flex;
+}
+
+.Button .btn-danger {
+  background-color: #d80505 !important;
+}
 /*# sourceMappingURL=myFlix-client.9f367d21.css.map */

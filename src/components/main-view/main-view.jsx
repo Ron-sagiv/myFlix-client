@@ -54,6 +54,11 @@ export const MainView = () => {
     localStorage.clear();
   };
 
+  const onUserUpdate = (user) => {
+    setUser(user);
+    localStorage.setItem('user', JSON.stringify(user));
+  };
+
   return (
     <BrowserRouter>
       <NavigationBar user={user} onLoggedOut={onLoggedOut} />
@@ -90,7 +95,7 @@ export const MainView = () => {
                 <LoginView onLoggedIn={onLoggedIn} />
               ) : (
                 <Col md={8}>
-                  <MovieView movies={movies} />
+                  <MovieView movies={movies} onUserUpdate={onUserUpdate} />
                 </Col>
               )
             }
@@ -113,7 +118,20 @@ export const MainView = () => {
               )
             }
           />
-          <Route path="/users/:userName" element={<ProfileView />} />
+          <Route
+            path="/users/:userName"
+            element={
+              !user ? (
+                <LoginView onLoggedIn={onLoggedIn} />
+              ) : (
+                <ProfileView
+                  user={user}
+                  movies={movies}
+                  onUserUpdate={onUserUpdate}
+                />
+              )
+            }
+          />
         </Routes>
       </Row>
     </BrowserRouter>

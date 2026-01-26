@@ -6,16 +6,12 @@ import { MovieCard } from '../movie-card/movie-card';
 /* =========================
    ProfileView Component
 ========================= */
-export const ProfileView = () => {
-  const { userName } = useParams();
+export const ProfileView = ({ user, movies, onUserUpdate }) => {
   const navigate = useNavigate();
 
-  const storedUser = JSON.parse(localStorage.getItem('user'));
   const token = localStorage.getItem('token');
 
-  const [user, setUser] = useState(null);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
-  const [allMovies, setAllMovies] = useState([]);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -26,37 +22,19 @@ export const ProfileView = () => {
      FETCH USER + MOVIES
      ========================= */
   useEffect(() => {
-    if (!token || !storedUser) return;
+    if (!token || !user) return;
 
-    /* fetch user */
-    fetch(
-      `https://flixirama-1ce078bad93f.herokuapp.com/users/${storedUser.userName}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      },
-    )
-      .then((res) => res.json())
-      .then((userData) => {
-        setUser(userData);
-        setFavoriteMovies(userData.favoriteMovies || []);
-
-        setUsername(userData.userName);
-        setEmail(userData.email);
-        setBirthday(userData.birthday?.slice(0, 10));
-      });
-
-    /* fetch movies  */
-    fetch('https://flixirama-1ce078bad93f.herokuapp.com/movies', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((movies) => setAllMovies(movies));
-  }, [token, storedUser]);
+    setUsername(user.userName);
+    setPassword(user.password);
+    setEmail(user.email);
+    setBirthday(user.birthday);
+    setFavoriteMovies(user.favoriteMovies || []);
+  }, [token, user]);
 
   /* =========================
      UPDATE USER
      ========================= */
-  const handleUpdate = (e) => {
+  const handleProfileUpdate = (e) => {
     e.preventDefault();
 
     fetch(
@@ -76,9 +54,8 @@ export const ProfileView = () => {
       },
     )
       .then((res) => res.json())
-      .then((updatedUser) => {
-        setUser(updatedUser);
-        localStorage.setItem('user', JSON.stringify(updatedUser));
+      .then((user) => {
+        onUserUpdate(user);
         alert('Profile updated');
       });
   };
@@ -97,8 +74,7 @@ export const ProfileView = () => {
       .then((res) => res.json())
       .then((updatedUser) => {
         setFavoriteMovies(updatedUser.favoriteMovies);
-        setUser(updatedUser);
-        localStorage.setItem('user', JSON.stringify(updatedUser));
+        onUserUpdate(updatedUser);
       });
   };
 
@@ -125,8 +101,7 @@ export const ProfileView = () => {
   /* =========================
      FILTER FAVORITE MOVIES
      ========================= */
-
-  const favoriteMovieObjects = allMovies.filter((movie) =>
+  const favoriteMovieObjects = movies.filter((movie) =>
     favoriteMovies.includes(movie._id),
   );
 
@@ -157,7 +132,7 @@ export const ProfileView = () => {
         <Card>
           <Card.Body>
             <Card.Title>Update Profile</Card.Title>
-            <Form onSubmit={handleUpdate}>
+            <Form onSubmit={handleProfileUpdate}>
               <Form.Group>
                 <Form.Label>Username</Form.Label>
                 <Form.Control

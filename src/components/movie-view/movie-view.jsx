@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-export const MovieView = ({ movies }) => {
+export const MovieView = ({ movies, onUserUpdate }) => {
   const { movieId } = useParams();
   const movie = movies.find((m) => m._id === movieId);
 
@@ -44,7 +44,7 @@ export const MovieView = ({ movies }) => {
     )
       .then((res) => res.json())
       .then((updatedUser) => {
-        localStorage.setItem('user', JSON.stringify(updatedUser));
+        onUserUpdate(updatedUser);
         setIsFavorite(!isFavorite);
       })
       .catch((err) => console.error(err));

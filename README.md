@@ -105,3 +105,7 @@ The objective of this project is to build the client-side of the myFlix applicat
    ```bash
    git clone <repository-url>
    ```
+1. cd into the project folder and run
+   ```bash
+   npm start
+   ```

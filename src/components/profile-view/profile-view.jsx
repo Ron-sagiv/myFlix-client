@@ -92,6 +92,7 @@ export const ProfileView = ({ user, movies, onUserUpdate }) => {
       },
     ).then(() => {
       localStorage.clear();
+      onUserUpdate(null);
       navigate('/login');
     });
   };

@@ -12,16 +12,43 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+            {/* =========================
+               HOME (always visible)
+            ========================= */}
             <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
+
+            {/* =========================
+               LOGGED-IN LINKS
+               (MODIFIED: conditional rendering)
+            ========================= */}
             {user && (
-              <Nav.Link as={Link} to={`/users/${user.userName}`}>
-                My Profile
-              </Nav.Link>
+              <>
+                <Nav.Link as={Link} to={`/users/${user.userName}`}>
+                  My Profile
+                </Nav.Link>
+
+                {/* MODIFIED: Logout only when user exists */}
+                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+              </>
             )}
 
-            <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+            {/* =========================
+               LOGGED-OUT LINKS
+               (ADDED)
+            ========================= */}
+            {!user && (
+              <>
+                <Nav.Link as={Link} to="/login">
+                  Login
+                </Nav.Link>
+
+                <Nav.Link as={Link} to="/signup">
+                  Sign Up
+                </Nav.Link>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

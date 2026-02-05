@@ -13316,4 +13316,8 @@ textarea.form-control-lg {
 .Button .btn-danger {
   background-color: #d80505 !important;
 }
+
+.form-control {
+  color-scheme: dark;
+}
 /*# sourceMappingURL=myFlix-client.9f367d21.css.map */

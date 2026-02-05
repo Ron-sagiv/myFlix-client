@@ -13,3 +13,4 @@ src/components/movie-view/movie-view2.scss
 src/components/movie-card/movie-card2.jsx
 src/components/movie-view/movie-view2.jsx
 src/components/movie-view/movie-view2.scss
+src/components/navigation-bar/navigation-bar2.jsx

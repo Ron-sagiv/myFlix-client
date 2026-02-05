@@ -26,6 +26,7 @@ export const MainView = () => {
 
     // do not fetch unless token exists
     if (!token) {
+      setLoading(false); // FIX for bug: stuck in loading
       return;
     }
 

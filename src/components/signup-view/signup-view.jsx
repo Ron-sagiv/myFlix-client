@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router';
 
 export const SignupView = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
+
+  const navigate = useNavigate();
 
   const clearInputs = () => {
     setUserName('');
@@ -45,6 +48,7 @@ export const SignupView = () => {
         console.log('Signup success:', result);
         clearInputs();
         alert('Account created successfully!');
+        navigate('/login');
       })
       .catch((e) => {
         console.log('Error:', e);

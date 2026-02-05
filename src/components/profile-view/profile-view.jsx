@@ -3,6 +3,7 @@ import { Row, Col, Button, Form, Card } from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 import { MovieCard } from '../movie-card/movie-card';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 /* =========================
    ProfileView Component
 ========================= */
@@ -163,7 +164,7 @@ export const ProfileView = ({ user, movies, onUserUpdate }) => {
                 <Form.Label>Birthday</Form.Label>
                 <Form.Control
                   type="date"
-                  value={birthday}
+                  value={moment(birthday).format('YYYY-MM-DD')}
                   onChange={(e) => setBirthday(e.target.value)}
                 />
               </Form.Group>

@@ -26,7 +26,7 @@ export const ProfileView = ({ user, movies, onUserUpdate }) => {
     if (!token || !user) return;
 
     setUsername(user.userName);
-    setPassword(user.password);
+    setPassword('');
     setEmail(user.email);
     setBirthday(user.birthday);
     setFavoriteMovies(user.favoriteMovies || []);
@@ -148,6 +148,8 @@ export const ProfileView = ({ user, movies, onUserUpdate }) => {
                 <Form.Control
                   type="password"
                   onChange={(e) => setPassword(e.target.value)}
+                  required
+                  autoComplete="new-password"
                 />
               </Form.Group>
 

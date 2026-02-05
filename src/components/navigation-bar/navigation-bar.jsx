@@ -1,7 +1,8 @@
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const NavigationBar = ({ user, onLoggedOut }) => {
+  const navigate = useNavigate();
   return (
     <Navbar bg="dark" expand="lg" data-bs-theme="dark" className="mb-4">
       <Container>
@@ -30,7 +31,14 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                 </Nav.Link>
 
                 {/* MODIFIED: Logout only when user exists */}
-                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+                <Nav.Link
+                  onClick={() => {
+                    onLoggedOut();
+                    navigate('/login');
+                  }}
+                >
+                  Logout
+                </Nav.Link>
               </>
             )}
 
